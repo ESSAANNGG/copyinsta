@@ -37,6 +37,7 @@ public class UserDto {
                     .joinDate(localDateTime)
                     .role(role)
                     .build();
+
             return user;
         }
 }
