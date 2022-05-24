@@ -1,6 +1,6 @@
 package com.gram.copyinsta.config;
 
-import com.gram.copyinsta.service.MemberService;
+import com.gram.copyinsta.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private MemberService memberService;
+    private UserService userService;
 
     // 비밀번호 암호화
     @Bean
@@ -53,6 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder builder) throws Exception{
-        builder.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+        builder.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 }

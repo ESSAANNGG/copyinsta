@@ -1,7 +1,7 @@
 package com.gram.copyinsta.controller;
 
 import com.gram.copyinsta.dto.UserDto;
-import com.gram.copyinsta.service.MemberService;
+import com.gram.copyinsta.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
-public class MemberController {
-    private MemberService memberService;
+public class UserController {
+    private UserService memberService;
 
     @GetMapping("/")
     public String index(){
