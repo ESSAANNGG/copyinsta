@@ -38,6 +38,6 @@ public class User {
     private Role role;
 
 
-    public User(Long id, String pw, List<GrantedAuthority> authorities) {
+    public User(Long id, String pw, java.util.List<GrantedAuthority> authorities) {
     }
 }
