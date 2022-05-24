@@ -1,13 +1,20 @@
 package com.gram.copyinsta.service;
 
 import com.gram.copyinsta.dto.UserDto;
+import com.gram.copyinsta.entity.Role;
+import com.gram.copyinsta.entity.User;
 import com.gram.copyinsta.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
@@ -22,7 +29,15 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findUserByUserId(userId);
+        User userEntity = user.get();
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if(("admin@example.com").equals(userId)){
+            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+        }
+        return (UserDetails) new User(userEntity.getId(),userEntity.getPw(),authorities);
     }
 }

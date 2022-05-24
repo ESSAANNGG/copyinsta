@@ -1,9 +1,11 @@
 package com.gram.copyinsta.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,5 +38,6 @@ public class User {
     private Role role;
 
 
-
+    public User(Long id, String pw, List<GrantedAuthority> authorities) {
+    }
 }
