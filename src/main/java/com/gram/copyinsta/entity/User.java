@@ -28,9 +28,6 @@ public class User {
     private String pw;
 
     @Column
-    private String email;
-
-    @Column
     private LocalDateTime joinDate;
 
     @Enumerated(EnumType.STRING)
@@ -38,6 +35,4 @@ public class User {
     private Role role;
 
 
-    public User(Long id, String pw, java.util.List<GrantedAuthority> authorities) {
-    }
 }

@@ -30,14 +30,15 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findUserByUserId(userId);
-        User userEntity = user.get();
+        Optional<User> userWrapper = userRepository.findUserByUserId(userId);
+        User userEntity = userWrapper.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if(("admin@example.com").equals(userId)){
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         }
-        return (UserDetails) new User(userEntity.getId(),userEntity.getPw(),authorities);
+
+        return new org.springframework.security.core.userdetails.User(userEntity.getUserId(),userEntity.getPw(),authorities);
     }
 }
