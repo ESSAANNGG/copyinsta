@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @AllArgsConstructor
 public class UserController {
-    private UserService memberService;
+    private UserService userService;
 
     @GetMapping("/")
     public String index(){
@@ -24,7 +24,8 @@ public class UserController {
 
     @PostMapping("/user/signup")
     public String execSignup(UserDto userDto){
-        return null;
+        userService.joinUser(userDto);
+        return "redirect:/user/login";
     }
 
     @GetMapping("/user/login")
