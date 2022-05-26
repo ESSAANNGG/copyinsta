@@ -21,8 +21,6 @@ public class UserDto {
 
     private String pw;
 
-    private String email;
-
     private LocalDateTime localDateTime;
 
     private Role role;
@@ -33,7 +31,6 @@ public class UserDto {
                     .userId(userId)
                     .nickname(nickname)
                     .pw(pw)
-                    .email(email)
                     .joinDate(localDateTime)
                     .role(role)
                     .build();
