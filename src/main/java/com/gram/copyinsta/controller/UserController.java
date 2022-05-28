@@ -3,12 +3,14 @@ package com.gram.copyinsta.controller;
 import com.gram.copyinsta.dto.UserDto;
 import com.gram.copyinsta.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserController {
     private UserService userService;
 
@@ -16,6 +18,7 @@ public class UserController {
     public String index(){
         return "/index";
     }
+    //쓰레기코드 추가
 
     @GetMapping("/user/signup")
     public String dispSignup(){
