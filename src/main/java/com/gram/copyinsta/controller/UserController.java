@@ -20,6 +20,7 @@ public class UserController {
     }
     //쓰레기코드 추가
 
+
     @GetMapping("/user/signup")
     public String dispSignup(){
         return "/signup";
