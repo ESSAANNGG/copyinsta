@@ -25,6 +25,7 @@ public class UserDto {
 
     private Role role;
 
+
     //DTO -> Entity작업
         public User toEntity(){
             User user = User.builder()
