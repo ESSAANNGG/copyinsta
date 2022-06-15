@@ -1,6 +1,6 @@
 package com.gram.copyinsta.controller;
 
-import com.gram.copyinsta.dto.UserDto;
+import com.gram.copyinsta.dto.MemberDto;
 import com.gram.copyinsta.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserController {
+public class MemberController {
     private UserService userService;
 
     @GetMapping("/")
@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")
-    public String execSignup(UserDto userDto){
-        userService.joinUser(userDto);
+    public String execSignup(MemberDto userDto){
+//        userService.joinUser(userDto);
         return "redirect:/user/login";
     }
 

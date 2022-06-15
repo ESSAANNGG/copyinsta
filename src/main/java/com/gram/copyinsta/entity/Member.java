@@ -1,19 +1,17 @@
 package com.gram.copyinsta.entity;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Getter
 @Setter
-@Builder
-public class User {
+@EqualsAndHashCode(of = "userid")
+@ToString
+public class Member {
     @Id //PK 옵션
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,9 +28,10 @@ public class User {
     @Column
     private LocalDateTime joinDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column
-    private Role role;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="userId")
+    private List<MemberRole> memberRoles;
+
 
 
 }

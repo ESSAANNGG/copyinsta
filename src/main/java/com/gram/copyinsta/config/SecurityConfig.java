@@ -17,42 +17,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService;
 
-    // 비밀번호 암호화
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
+    //페이지 인증해제
     @Override
     public void configure(WebSecurity webSecurity) throws Exception{
-        webSecurity.ignoring().antMatchers("/css/**","/js/**","/lib/**");
+        webSecurity.ignoring().antMatchers("/css/**", "/script/**", "image/**", "/fonts/**", "lib/**");
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception{
+    public void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeRequests()
-                //페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/userinfo").hasRole("USER")
-                .antMatchers("/**").permitAll()
-        .and() //로그인 설정
-                .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/user/login/result")
-                .permitAll()
-        .and() // 로그아웃 설정
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/user/logout/result")
-                .invalidateHttpSession(true)
-        .and()
-                .exceptionHandling().accessDeniedPage("/user/denied");
-    }
-
-    @Override
-    public void configure(AuthenticationManagerBuilder builder) throws Exception{
-        builder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+                .antMatchers("/**").permitAll();
     }
 }

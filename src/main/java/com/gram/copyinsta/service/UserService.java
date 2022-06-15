@@ -1,9 +1,9 @@
 package com.gram.copyinsta.service;
 
-import com.gram.copyinsta.dto.UserDto;
-import com.gram.copyinsta.entity.Role;
-import com.gram.copyinsta.entity.User;
-import com.gram.copyinsta.repository.UserRepository;
+import com.gram.copyinsta.dto.MemberDto;
+import com.gram.copyinsta.entity.MemberRole;
+import com.gram.copyinsta.entity.Member;
+import com.gram.copyinsta.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,29 +19,34 @@ import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
-    private UserRepository userRepository;
-
-    @Transactional
-    public Long joinUser(UserDto userDto){
-        //비밀번호 암호화
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        userDto.setPw(passwordEncoder.encode(userDto.getPw()));
-
-        return userRepository.save(userDto.toEntity()).getId();
-    }
-
+    private MemberRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        Optional<User> userWrapper = userRepository.findUserByUserId(userId);
-        User userEntity = userWrapper.get();
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        if(("admin@example.com").equals(userId)){
-            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
-        }
-
-        return new org.springframework.security.core.userdetails.User(userEntity.getUserId(),userEntity.getPw(),authorities);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
+
+//    @Transactional
+//    public Long joinUser(MemberDto userDto){
+//        //비밀번호 암호화
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        userDto.setPw(passwordEncoder.encode(userDto.getPw()));
+//
+////        return userRepository.save(userDto.toEntity()).getId();
+//    }
+//
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+////        Optional<Member> userWrapper = userRepository.findUserByUserId(userId);
+////        Member userEntity = userWrapper.get();
+//
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        if(("admin@example.com").equals(userId)){
+////            authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+//        }
+//
+////        return new org.springframework.security.core.userdetails.User(userEntity.getUserId(),userEntity.getPw(),authorities);
+//    }
 }
