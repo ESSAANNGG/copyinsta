@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(of = "userid")
+@EqualsAndHashCode(of = "userId")
 @ToString
 public class Member {
     @Id //PK 옵션
@@ -20,10 +20,10 @@ public class Member {
     private String userId;
 
     @Column
-    private String nickname;
+    private String pw;
 
     @Column
-    private String pw;
+    private String nickname;
 
     @Column
     private LocalDateTime joinDate;
