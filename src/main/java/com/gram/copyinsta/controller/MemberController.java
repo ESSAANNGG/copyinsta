@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Arrays;
 
@@ -23,7 +24,12 @@ public class MemberController {
     @Autowired
     MemberRepository memberRepository;
 
-    @PostMapping("")
+    @GetMapping("/signUp")
+    public String signUp1(){
+        return "/member/signUp";
+    }
+
+    @RequestMapping(value = "",method =  RequestMethod.POST)
     public String signUp(Member member){
         MemberRole memberRole = new MemberRole();
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

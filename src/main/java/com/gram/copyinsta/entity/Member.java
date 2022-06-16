@@ -1,9 +1,11 @@
 package com.gram.copyinsta.entity;
 
 import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,13 +27,11 @@ public class Member {
     @Column
     private String nickname;
 
-    @Column
-    private LocalDateTime joinDate;
+    @UpdateTimestamp
+    private Date joinDate;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="userId")
     private List<MemberRole> memberRoles;
-
-
 
 }
