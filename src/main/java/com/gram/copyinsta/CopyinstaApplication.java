@@ -9,5 +9,4 @@ public class CopyinstaApplication {
     public static void main(String[] args) {
         SpringApplication.run(CopyinstaApplication.class, args);
     }
-
 }
