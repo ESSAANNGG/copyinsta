@@ -3,6 +3,7 @@ package com.gram.copyinsta.controller;
 import com.gram.copyinsta.entity.Member;
 import com.gram.copyinsta.entity.MemberRole;
 import com.gram.copyinsta.repository.MemberRepository;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 @Controller
@@ -33,5 +35,12 @@ public class MemberController {
         member.setMemberRoles(Arrays.asList(memberRole));
         memberRepository.save(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String loginForm(HttpServletRequest request){
+        String referer = request.getHeader("Referer");
+        request.getSession().setAttribute("prevPage",referer);
+        return "/login";
     }
 }
