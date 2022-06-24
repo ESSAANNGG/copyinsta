@@ -41,6 +41,6 @@ public class MemberController {
     public String loginForm(HttpServletRequest request){
         String referer = request.getHeader("Referer");
         request.getSession().setAttribute("prevPage",referer);
-        return "/login";
+        return "/member/login";
     }
 }
